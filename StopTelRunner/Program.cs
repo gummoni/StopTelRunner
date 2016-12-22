@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,14 +44,13 @@ namespace StopTelRunner
             System.Collections.ArrayList list = new System.Collections.ArrayList();
 
             //すべてのプロセスを列挙する
-            foreach (System.Diagnostics.Process p
-                in System.Diagnostics.Process.GetProcesses())
+            foreach (Process p in Process.GetProcesses())
             {
                 string fileName;
                 try
                 {
                     //メインモジュールのパスを取得する
-                    fileName = p.MainModule.FileName;
+                    fileName = p.ProcessName;
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {
@@ -74,8 +70,7 @@ namespace StopTelRunner
             }
 
             //コレクションを配列にして返す
-            return (System.Diagnostics.Process[])
-                list.ToArray(typeof(System.Diagnostics.Process));
+            return (Process[])list.ToArray(typeof(Process));
         }
     }
 }
